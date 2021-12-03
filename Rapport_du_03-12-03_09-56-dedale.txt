@@ -1,0 +1,805 @@
+###################################################################################################
+# Obj : informations uname  #
+###################################################################################################
+Hostname : dedale 
+ven. 03 déc. 2021 09:56:45 CET
+version 5.10.09amd64 
+
+########################################################################################
+# Obj : informations réseau du serveur                                                 #
+########################################################################################
+
+Adressage IP du serveur :
+    inet 127.0.0.1/8 scope host lo
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic noprefixroute enp0s3
+
+Route disponible :
+ 
+default via 10.0.2.2 dev enp0s3 proto dhcp metric 100 
+10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100 
+169.254.0.0/16 dev enp0s3 scope link metric 1000 
+
+Les Route inutiles doivent etre suprimer, pour cela utiliser la commande <route del net ...>
+
+#############################################################################################
+# Obj : process en écoute sur le serveur                                                    #
+#############################################################################################
+
+Process en écoute sur le serveur :
+
+Netid State     RecvQ SendQ    Local Address:Port     Peer Address:PortProcess                                  
+udp   ESTAB     0      0      10.0.2.15%enp0s3:68           10.0.2.2:67   users:(("NetworkManager",pid436,fd23))
+udp   UNCONN    0      0               0.0.0.0:5353          0.0.0.0:*    users:(("avahidaemon",pid433,fd12))  
+udp   UNCONN    0      0               0.0.0.0:59863         0.0.0.0:*    users:(("avahidaemon",pid433,fd14))  
+udp   UNCONN    0      0                  :::5353             :::*    users:(("avahidaemon",pid433,fd13))  
+udp   UNCONN    0      0                  :::54508            :::*    users:(("avahidaemon",pid433,fd15))  
+tcp   LISTEN    0      128             0.0.0.0:22            0.0.0.0:*    users:(("sshd",pid515,fd3))           
+tcp   TIMEWAIT 0      0             10.0.2.15:44076 199.232.178.132:80                                           
+tcp   TIMEWAIT 0      0             10.0.2.15:44078 199.232.178.132:80                                           
+tcp   LISTEN    0      128                :::22               :::*    users:(("sshd",pid515,fd4))           
+
+
+Vous avez 1 ports ouverts en tcp sur ipv6
+Vous avez 2 ports ouverts en udp sur ipv6
+Vous avez 3 ports ouverts en en tcp sur ipv4
+Vous avez 3 ports ouverts en en udp sur ipv4
+
+#############################################################################################
+# Obj : Services classiques en ecoute sur un serveur installé par défaut                    #
+#############################################################################################
+
+Le service avahi est actif sur ce serveur
+
+###################################################################################
+# Désactiver les sevices en écoute qui ne sont pas néccesaire          #
+###################################################################################
+
+Pour les services inutile qui sont en ecoute, 2 choix s'offrent a vous : 
+    Desactiver le service <service stop nom_du_service>
+    Suprimer le service pour cela : 
+             + sudo yum purge packet_du_service_a_suprimer (jusqu'a Red Hat 8)
+             + sudo dnf purge packet_du_service_a_suprimer (Remplacement de yum)
+             + sudo apt purge packet_du_service_a_suprimer (Debian)
+             + sudo snapy purge packet_du_service_a_suprimer (Ubuntu)
+
+Il est recommandé de suprimer les services inutiles, si les services doivent
+etre utiliser dans un futur tres proche sur votre SI vous pouvez juste le desactiver
+###########################################################################
+# Obj : configuration du Parefeu  si Présent  #
+###########################################################################
+
+Configuration du parefeu local :
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+###########################################################################################
+# Obj : utilisation de l'espace disque  #
+###########################################################################################
+
+Utilisation de l'espace disque :
+
+Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur
+udev               969M       0  969M   0% /dev
+tmpfs              199M    1,2M  198M   1% /run
+/dev/sda1          8,9G    4,6G  3,9G  55% /
+tmpfs              992M       0  992M   0% /dev/shm
+tmpfs              5,0M    4,0K  5,0M   1% /run/lock
+tmpfs              199M    116K  199M   1% /run/user/1000
+Debian             218G    122G   96G  57% /media/sf_Debian
+
+######################################################################################
+# Obj : récupération des numéros de série des disques     #
+######################################################################################
+
+E: ID_SERIALVBOX_HARDDISK_VBcead11b334f7d8f6
+E: ID_SERIAL_SHORTVBcead11b334f7d8f6
+E: ID_SERIALVBOX_HARDDISK_VBcead11b334f7d8f6
+E: ID_SERIAL_SHORTVBcead11b334f7d8f6
+E: ID_SERIALVBOX_HARDDISK_VBcead11b334f7d8f6
+E: ID_SERIAL_SHORTVBcead11b334f7d8f6
+E: ID_SERIALVBOX_HARDDISK_VBcead11b334f7d8f6
+E: ID_SERIAL_SHORTVBcead11b334f7d8f6
+##############################################################################
+# Obj : vérification des bons usages sshd     #
+##############################################################################
+
+Evaluation nonexhaustive de la configuration du serveur ssh (/etc/ssh/sshd_config) : 
+
+ !!! Toute les modifications se font dans le fichier /etc/ssh/sshd_config !!!
+
+Validation explicite par lutilisateur de la clé hôte : non 
+    > Paramétre à modifier seulement si le poste contrôlé est un poste client.
+Pour cela dans /etc/ssh/sshd_config modifier ou ajouter <StrictHostKeyChecking ask> 
+Rectitude des modes et droits : ok
+Interdire les mots de passe vide : ok
+Nombre de tentative d'authentification : non 
+ Dans /etc/ssh/sshd_config modifier ou ajouter <MaxAuthTries 2>
+Limite de la durée d'authentification : non 
+ Dans /etc/ssh/sshd_config modifier ou ajouter <LoginGraceTime 30>
+Connexion de root interdite : non 
+ Dans /etc/ssh/sshd_config modifier ou ajouter <PermitRootLogin no>
+Affichage de la dernière connexion : ok
+Limiter les utilisateurs autorisés : non 
+    > Si vous souhaitez ajouter une liste de compte local d'utilisateur 
+pouvant accepter les connexions SSH ,rajouter le paramétre AllowUsers 
+dans /etc/sshd/sshd_config (ex : AllowUsers user1 user2 )
+Limiter les groupes autorisés : non 
+    > Si vous souhaitez ajouter une liste de groups 
+pouvant accepter les connexions SSH ,rajouter le paramétre AllowGroups 
+dans /etc/sshd/sshd_config (ex : AllowUsers group1 group2 )
+Bloquer la modification de lenvironnement : ok
+Limiter les interfaces : non 
+ dans /etc/ssh/sshd_config modifier ou ajouter <ListenAddress> ce champs doit contenir les bons parametres 
+(addresse d ecoute,ipv4 ou ipv6...,port)
+Désactiver les redirections côté serveur : ok
+Désactivation de la redirection X11 : ok
+
+##########################################################################################
+# Obj : vérification nonexhautive des recommandations de configuration                  #
+##########################################################################################
+Recommandations issues de la note technique NoDATNT28/ANSSI/SDE/NP du 22 fevrier 2019
+Version 1.2 du guide
+
+
+R1 Liste des services installés sur le serveur
+     alsautils
+     anacron
+  +   apparmor
+  +   avahidaemon
+     bluetooth
+     consolesetup.sh
+  +   cron
+  +   dbus
+  +   gdm3
+     hwclock.sh
+     keyboardsetup.sh
+  +   kmod
+  +   networking
+     plymouth
+  +   plymouthlog
+  +   procps
+     pulseaudioenableautospawn
+  +   rsyslog
+     saned
+     speechdispatcher
+  +   ssh
+     sudo
+  +   udev
+  +   unattendedupgrades
+     x11common
+
+Desactiver ou Suprimer tous les services non utilisé ou inutile
+
+
+R2 Minimisation de la configuration : Non évaluée
+Les fonctionnalités configurées au niveau des services démarrés doivent être limitées au strict nécessaire
+
+
+R3 Principe de moindre privilège : Non évaluée
+Les services et exécutables disponibles sur le système doivent faire lobjet 
+ dune analyse afin de connaître les privilèges qui leurs sont associés, 
+ et doivent ensuite être configurés et intégrés en vue den utiliser le strict nécessaire.
+
+
+R4 Utilisation des fonctionnalités de contrôle d'accès : Non évaluée
+Utilisation des fonctionnalités de contrôle daccès. Il est recommandé dutiliser 
+ les fonctionnalités de contrôle daccès obligatoire (MAC) en plus du traditionnel modèle 
+ utilisateur Unix (DAC), voire éventuellement 
+ de les combiner avec des mécanismes de cloisonnement.
+
+
+R5 Principe de défense en profondeur : Non évaluée
+Sous Unix et dérivés, la défense en profondeur doit reposer sur une combinaison de 
+ barrières quil faut garder indépendantes les unes des autres. 
+  Par exemple : 
+  authentification nécessaire avant deffectuer des opérations, notamment quand ellessont privilégiées ;
+     journalisation centralisée dévènements au niveau systèmes et services ;
+     priorité à lusage de services qui implémentent des mécanismes de cloisonnement et/ou
+ de séparation de privilèges ;
+     utilisation de mécanismes de prévention dexploitation.
+
+
+R6  Cloisonnement des services réseau : Non évaluée
+Les services réseau doivent autant que possible être hébergés sur des environnements
+distincts. Cela évite davoir dautres services potentiellement affectés si lun deux se
+retrouve compromis sous le même environnement.
+
+
+R7  Journalisation de lactivité des services Non évaluée
+Les activités du système et des services en cours dexécution doivent être 
+ journalisées et archivées sur un système externe, non local.
+
+Verification si les MAJ ont etait faite récemment
+
+R8 Simmulation de mise à jour :
+Atteint:1 http://security.debian.org/debiansecurity bullseyesecurity InRelease
+Atteint:2 http://deb.debian.org/debian bullseye InRelease
+Atteint:3 http://deb.debian.org/debian bullseyeupdates InRelease
+Lecture des listes de paquets
+Lecture des listes de paquets
+Construction de l'arbre des dépendances
+Lecture des informations d'état
+Calcul de la mise à jour
+Les paquets suivants seront mis à jour:
+  libnss3
+1 mis à jour, 0 nouvellement installés, 0 à enlever et 0 non mis à jour.
+Inst libnss3 2:3.611 (2:3.611+deb11u1 DebianSecurity:11/stablesecurity amd64)
+Conf libnss3 (2:3.611+deb11u1 DebianSecurity:11/stablesecurity amd64)
+
+
+R9 Configuration matérielle : Non évaluée
+Il est conseillé dappliquer les recommandations de configuration mentionnées dans
+la note technique  Recommandations de configuration matérielle de postes clients et
+serveurs x86_4
+
+
+R10 Privilégié une installation 64bits de votre SI
+
+R10 Vous avez privilégié une installation 64bits de votre système
+
+
+R11 Lactivation du service dIOMMU permet de protéger la mémoire du système
+Ajoutez la variable iommuforce  dans /etc/default/grub ou  /boot/grub/menu.lst
+
+
+R12 : Partitionement 
+Ci dessous votre partitionement : 
+ 
+Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur
+udev               969M       0  969M   0% /dev
+tmpfs              199M    1,2M  198M   1% /run
+/dev/sda1          8,9G    4,6G  3,9G  55% /
+tmpfs              992M       0  992M   0% /dev/shm
+tmpfs              5,0M    4,0K  5,0M   1% /run/lock
+tmpfs              199M    116K  199M   1% /run/user/1000
+Debian             218G    122G   96G  57% /media/sf_Debian
+
+Vous trouverez ci dessous le partionement type recommandé
+Faire attention a donner une grande taille pour les log  et bien les separer
+
+Partitionnement type Non évaluée
+##
+# Point de montage |       Options              | Description                                         #
+##
+#      /           |     <sans option>          |Partition racine, contient le reste delarborescence #
+##
+#       /boot      | nosuid,nodev,noexec        | Contient le noyau et le chargeur dedémarrage.       #
+#                  |       (noauto optionnel)   |  nécessaire une fois le boot terminé                #
+#                  |                            |          (sauf mise à jour)                         #
+##
+#       /opt       | nosuid,nodev(ro optionnel) | Packages  additionnels  au  système.                #
+#                  |                            | Montage en lecture seule si non utilisé             #
+##
+#     /tmp         |                            |   Fichiers temporaires. Ne doit contenir            #
+#                  |    nosuid,nodev,noexec     | que des éléments non exécutables.                   #
+#                  |                            | Nettoyé après redémarrage                           #
+##
+#     /srv         |nosuid,nodev                | Contient des fichiers servis par un                 #
+#                  |(noexec,ro optionnels)      |  service type web, ftp, etc.                        #
+##
+#      /home       |      nosuid,nodev,noexec   |Contient  les HOME utilisateurs.                     #
+#                  |                            |Montage  en  lecture  seule  si  non utilisé         #
+##
+#     /proc        |       hidepid1            |Contient des informations sur les processus          #
+#                  |                            |et le système                                        #
+##
+#      /usr        |      nodev                 |Contient la majorité des utilitaires et              #
+#                  |                            |fichiers système                                     #
+##
+#       /var       | nosuid,nodev,noexec        |Partition contenant des fichiers variables           #
+#                  |                            |pendant  la  vie  du  système                        #
+#                  |                            |(mails, fichiers PID, bases de données dun service) #
+##
+#    /var/log      |  nosuid,nodev,noexec       |Contient les logs du système                         #
+##
+#    /var/tmp      |  nosuid,nodev,noexec       |Fichiers temporaires conservés après extinction      #
+##
+
+
+#R13 Restrictions daccès sur les fichiers System.map
+Votre système ne dispose pas de system.map
+
+#R14 Installation de paquets réduite au strict nécessaire Non évaluée
+
+#R15 Choix des dépôts de paquets Non évaluée
+   > Seule depot connue et offciels doivent etre utilisés
+# deb cdrom:Debian GNU/Linux 11.1.0 _Bullseye_  Official amd64 NETINST 2021100910:07/ bullseye main
+
+#deb cdrom:Debian GNU/Linux 11.1.0 _Bullseye_  Official amd64 NETINST 2021100910:07/ bullseye main
+
+deb http://deb.debian.org/debian/ bullseye main
+debsrc http://deb.debian.org/debian/ bullseye main
+
+deb http://security.debian.org/debiansecurity bullseyesecurity main
+debsrc http://security.debian.org/debiansecurity bullseyesecurity main
+
+# bullseyeupdates, to get updates before a point release is made;
+# see https://www.debian.org/doc/manuals/debianreference/ch02.en.html#_updates_and_backports
+deb http://deb.debian.org/debian/ bullseyeupdates main
+debsrc http://deb.debian.org/debian/ bullseyeupdates main
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching "deb cdrom"
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+
+#R16 Dépôts de paquets durcis Non évaluée
+     > Choisir comme depot ceux offrant le durcissement le plus elevé pour les packet 
+
+#R17 Mot de passe du chargeur de démarrage Non évaluée
+     > Un mot de passe  doit etre mis  pour proteger le grub ors du demarage 
+       Pour cela, crée un mdp via la commande <grubmkpassswdpbkdf2> 
+cela permet d'avoir un mdp obscursit et donc plus de secu, puis copier le mdp masqué a 
+partir de <grub.pk.....> dans /boot/grub/grub.cfg  au debut du fichier avant le mot 
+        <#BEGIN>, il faudra d'abord crée le superuser puis lui assosier le mdp precedement copier.
+EX : set superusers  toto
+     password_pbkdf2 toto
+      mettre_le_mdp_copier
+
+     EOF       (NE PAS OUBLIER D'ECRIRE <EOF> a la suite CELA PERMET DE CONSERVER 
+LES MODIF EN CAS DE MAJ )
+
+Enfin faire la commande updategrub
+
+#R18 Robustesse du mot de passe administrateur Non évaluée
+   > Le mdp Admin doit faire une taille minimum de 14 caractere avec presence 
+de au moins 1 chiffre, 1 caractere special, et 1 Majuscule.
+Il doit etre unique pour chaque compte Admin
+Le compte <root> est bien un compte admin (superuser) et doit 
+donc repondre a ces critere
+
+#R19 Imputabilité des opérations dadministration Non évaluée
+Chaque Admin dispose de son compte Admin local ou distant pour effectuer ces 
+action d administration, en aucun cas le compte root ne doit etre utilisé pour 
+ce type d'action
+
+#R20 Installation déléments secrets ou de confiance Non évaluée
+#R21 Durcissement et surveillance des services soumis à des flux arbitraires Non évaluée
+ > Les service exposés et no n durcis doivent faire preuve d une attention 
+pariculiére et surveillée
+
+
+ 
+
+#######################################################################################
+ Toute les config pour la R22 et la R23 doivent se faire absolument dans le fichier 
+/etc/sysctl sinon elle ne seront pas permanent, ne surtout pas utiliser la 
+commande <sysctl w>
+ 
+
+#######################################################################################
+
+#R22 Paramétrage des sysctl réseau
+Préconisation : Pas de  routage  entre  les  interfaces
+Le routage est désactivé entre vos interfaces
+
+
+Filtrage  par  chemin  inverse
+Préconisation : Pas de routage des flux étrangés (all)
+Le routage des paquets étrangers est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   net.ipv4.conf.all.rp_filter1
+
+
+Filtrage  par  chemin  inverse
+Préconisation : Pas de  routage  de flux étrangés (default)
+Le routage des paquets étrangers est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.default.rp_filter1
+
+
+Ne pas  envoyer  de  redirections  ICMP
+Préconisation : Pas de  redirection ICMP (all)
+La redirection ICMP est activée
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.all.send_redirects0
+
+
+Ne pas  envoyer  de  redirections  ICMP
+Préconisation : Pas de  redirection ICMP (default)
+La redirection ICMP est activée
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.default.send_redirects0
+
+
+Refuser  les  paquets  de  source  routing
+Préconisation : Refuser  les  paquets  de  source  routing (all)
+Le source  routing est déactivé
+
+
+Refuser  les  paquets  de  source  routing
+Préconisation : Refuser  les  paquets  de  source  routing (default)
+Le source  routing est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.default.accept_source_route0
+
+
+Ne pas  accepter  les  ICMP de type  accept redirect
+Préconisation : Refuser  les  ICMP de type redirect (all)
+Le serveur accepte les flux de type ICMP redirect
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.all.accept_redirects0
+
+
+Ne pas  accepter  les  ICMP de type  secure redirect
+Préconisation : Refuser  les  ICMP de type redirect (all)
+Le serveur accepte les flux de type ICMP redirect
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv4.conf.all.secure_redirects0
+
+
+Ne pas  accepter  les  ICMP de type  accept redirect
+Préconisation : Refuser  les  ICMP de type redirect (default)
+Le serveur n'accepte pas les flux de type ICMP redirect
+
+
+Ne pas  accepter  les  ICMP de type  accept redirect
+Préconisation : Refuser  les  ICMP de type redirect (default)
+Le serveur n'accepte pas les flux de type ICMP redirect
+
+
+Loguer  les  paquets  ayant  des IPs  anormales
+Préconisation : Loguer  les  paquets  ayant  des IPs  anormales (default)
+les paquets  ne sont pas loggé
+Pour cela modifier le fichier </etc/sysctl.conf> :   net.ipv4.conf.all.log_martians1
+
+
+RFC 1337
+Préconisation : TIMEWAIT Assassination Hazards in TCP
+Problème tcp nontraité
+Pour cela modifier le fichier </etc/sysctl.conf> :   net.ipv4.tcp_rfc13371
+
+
+Ignorer  les réponses  non  conformes à la RFC 1122
+Préconisation : Ignorer  les réponses  non  conformes
+Réponses ignorées
+
+
+Augmenter  la plage  pour  les  ports éphémères
+La plage de ports éphèmères est à augmenter
+si besoin :  net.ipv4.ip_local_port_range"32768 65535"
+
+
+Utiliser  les SYN  cookies
+SYN cookies utilisés
+
+
+Désactiver  le  support  des router solicitations (all)
+Le support est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.all.router_solicitations0
+
+
+Désactiver  le  support  des router solicitations (default)
+Le support est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.router_solicitations0
+
+
+Ne pas  accepter  les routers preferences par router advertisements(all)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.all.accept_ra_rtr_pref0
+
+
+Ne pas  accepter  les router preferences par router advertisements(default)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.accept_ra_rtr_pref0
+
+
+Pas de  configuration  auto  des  prefix  par router advertisements(all)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.all.accept_ra_pinfo0
+
+Pas de  configuration  auto  des  prefix  par router advertisements(default)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.accept_ra_pinfo0
+
+
+Pas dapprentissage  du  routeur  par défaut  par router advertisements(all)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.all.accept_ra_defrtr0
+
+Pas dapprentissage  du  routeur  par défaut  par router advertisements(default)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.accept_ra_defrtr0
+
+
+Pas de  configuration  auto  des  adresses à partir  des router advertisements(all)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   net.ipv6.conf.all.autoconf0
+
+Pas de configuration auto des adresses à partir des router advertisements(default)
+Le support est activé 
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.autoconf0
+
+
+Ne pas accepter les ICMP de type redirect (all)
+Les ICMP redirect sont acceptées
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.all.accept_redirects0
+
+Ne pas  accepter  les  ICMP de type  redirect (default)
+Les ICMP redirect sont acceptées
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+net.ipv6.conf.default.accept_redirects0
+
+
+Refuser  les  packets  de  source  routing (all)
+Les packets de source routing sont refusés
+
+Refuser  les  packets  de  source  routing(default)
+Les packets de source routing sont refusés
+
+Nombre  maximal dadresses  autoconfigurées par  interface (all)
+Les packets de source routing sont refusés
+
+Nombre  maximal dadresses  autoconfigurées par  interface (default)
+Les packets de source routing sont refusés
+
+#R23 Paramétrage des sysctl système
+Désactivation  des  SysReq
+Les requètes systèmes sont activées
+
+Pas de core  dump  des exécutables  setuid
+Les core dump sont désactivés
+
+Interdiction de déréférencer des liens (link) vers des fichiers dont lutilisateur courant nest pas le propriétaire
+Le déréférencement des liens symboliques est désactivé
+
+Interdiction de déréférencer des liens (hard) vers des fichiers dont lutilisateur courant nest pas le  propriétaire
+Le déréférencement des liens symboliques est désactivé
+
+Activation de l'ASLR
+L'ASLR est activée
+
+
+Interdiction  de  mapper  de la mémoire  dans  les  adresses  basses  
+La plage de mémoire adressable est conforme
+
+
+Espace  de choix  plus  grand  pour  les  valeurs  de PID
+Il'espace de choix pour les valeurs de PID doit être augementé
+Pour cela modifier le fichier </etc/sysctl.conf> :   kernel.pid_max65536
+
+
+Obfuscation  des  adresses mémoire  kernel
+Obfuscation  des  adresses mémoire  kernel désactivé
+Pour cela modifier le fichier </etc/sysctl.conf> :   kernel.kptr_restrict1
+
+
+Restriction daccès au  buffer  dmesg
+Accès au buffer dmesg restreint
+
+
+Restriction de lutilisation du sous système perf : paranoid
+L'accès au sous systeme perf n'est pas restreint
+Pour cela modifier le fichier </etc/sysctl.conf> :   kernel.perf_event_paranoid2
+
+
+Restriction de lutilisation du sous système perf : max sample rate
+L'accès au sous systeme perf n'est pas restreint
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+kernel.perf_event_max_sample_rate2
+
+
+Restriction de lutilisation du sous système perf : cpu time max
+L'accès au sous systeme perf n'est pas restreint
+Pour cela modifier le fichier </etc/sysctl.conf> :   
+kernel.perf_cpu_time_max_percent1
+
+
+R24 Désactivation du chargement des modules noyau
+Le chargement des modules noyau est activé
+Pour cela modifier le fichier </etc/sysctl.conf> :   kernel.modules_disabled1
+
+#R25 Configuration sysctl du module Yama Non évaluée
+
+
+#R26 Désactivation des comptes utilisateurs inutilisés Non évaluée
+> les comptes user  inutilisé doivent etre desactivé pour cela  :
+ On verouille le compte : usermod L <compte>
+ Desactivation de son shell : usermod s /bin/false <compte>
+
+
+
+#R27 Désactivation des comptes de services Non évaluée
+> Desactiver les comptes de service inutile
+
+#R28 Unicité et exclusivité des comptes de services système Non évaluée
+
+#R29 Délai dexpiration de sessions utilisateurs Non évaluée
+
+
+#R30 Applications utilisant PAM Non évaluée
+Les aplications et les services qui utilise PAM dooivent etre réduit au strict minimum
+
+
+e\n#R31 Sécurisation des services réseau dauthentification PAM Non évaluée
+ > Secu du pam a modifier par raport a l objectif voulue et si utilisation du pam :
+ l'ajout de la ligne < authrequiredpam_wheel.so>
+permet de bloquer l'acces root au menbre du groupe wheel
+
+ l'utilisation de pam_cracklib dans /etc/pam.d/passwd permet de gerer la 
+complexite des mot de passe
+EX : 
+Dans cette exemple le mdp est de minimum 14 caractere avec pas de repetion ni sequence monotone
+avec 3 classe differente (parmi majuscule,miniscule, chiffres, autres)
+passwordrequired      pam_cracklib.so minlen14 minclass3 
+      decredit0 ucredit0 lcredit0
+      maxrepeat1 maxsequence1 gecoscheck 
+
+
+
+
+
+#R32 Protection des mots de passe stockés Non évaluée
+Secu a modifier dans le pam par rapport a l objectif et si utilisation du pam dans:
+# Fichier /etc/pam.d/common password
+password required pam_unix.so obscure sha512 rounds 65536
+
+# Fichier /etc/login.defs
+ENCRYPT_METHOD SHA512
+SHA_CRYPT_MIN_ROUNDS 65536 
+
+
+#R33 Sécurisation des accès aux bases utilisateurs distantes Non évaluée
+
+
+
+#R34 Séparation des comptes système et dadministrateur de lannuaire Non évaluée
+
+
+
+#R35 Valeur de umask Non évaluée
+Le umask système doit être positionné à 0027.
+Le umask pour les utilisateurs doit être positionné à 0077.
+
+
+#R36 Droits daccès aux fichiers de contenu sensible Non évaluée
+
+
+#R37 Exécutables avec bits setuid et setgid Non évaluée
+
+#R38 Exécutables setuid root Non évaluée
+Lister lensemble des fichiers setuid/setgid
+find / type f perm /6000 ls 2>/dev/null
+
+Retirer les droits setuid ou setgid
+chmod us <fichier > # Retire le bit setuid
+chmod gs <fichier > # Retire le bit setgid
+
+
+#R39 Répertoires temporaires dédiés aux comptes Non évaluée
+
+
+#R40 Sticky bit et droits daccès en écriture Non évaluée
+
+#R41 Sécurisation des accès pour les sockets et pipes nommées Non évaluée
+
+
+#
+R42 Services et daemons résidents en mémoire Non évaluée
+Seuls les démons réseau strictement nécessaires au fonctionnement du système et du service quils rendent doivent être résidents et nêtre en écoute que sur les interfaces
+réseau adéquates.
+Les autres démons doivent être désactivés et autant que possible désinstallés.
+
+Liste des processus résidents et ceux en écoute sur le réseau
+# Liste des processus résidents
+ps aux
+# Liste des processus en écoute sur le réseau
+netstat aelonptu
+
+
+#R43 Durcissement et configuration du service syslog Non évaluée
+#R44 Cloisonnement du service syslog par chroot Non évaluée
+#R45 Cloisonnement du service syslog par container Non évaluée
+#R46 Journaux dactivité de service Non évaluée
+#R47 Partition dédiée pour les journaux Non évaluée
+#R48 Configuration du service local de messagerie Non évaluée
+#R49 Alias de messagerie des comptes de service Non évaluée
+#R50 Journalisation de lactivité par auditd Non évaluée
+#R51 Scellement et intégrité des fichiers Non évaluée
+#R52 Protection de la base de données des scellés Non évaluée
+#R53 Restriction des accès des services déployés Non évaluée
+#R54 Durcissement des composants de virtualisation Non évaluée
+#R55 Cage chroot et privilèges daccès du service cloisonné Non évaluée
+#R56 Activation et utilisation de chroot par un service Non évaluée
+
+
+#R57 Groupe dédié à lusage de sudo Non évaluée
+Un groupe dédié à lusage de sudo doit être créé. Seuls les utilisateurs membres de ce groupe doivent avoir le droit dexécuter sudo.
+Groupe sudo dédié
+# ls al /usr/bin/sudo
+rwsr x. 2 root sudogrp ... /usr/bin/sudo
+
+
+
+#R58 Directives de configuration sudo Non évaluée
+
+
+
+R58 Directives de configuration sudo
+L'execution des subsystem est autorisé
+Ajouter les lignes suivants à votre sudoers :
+         Defaults noexec,requiretty,use_pty,umask0027
+         Defaults ignore_dot,env_reset,passwd_timeout1
+
+#R59 Authentification des utilisateurs exécutant sudo
+
+#R60 Privilèges des utilisateurs cible pour une commande sudo 
+
+#R61 Limitation du nombre de commandes nécessitant loption EXEC
+   > recommandation évaluée dans la R58
+
+
+
+#R62 Du bon usage de la négation dans une spécification sudo
+Pas de négation dans votre fichier sudoers
+
+#R63 Arguments explicites dans les spécifications sudo
+Pas de /* dans votre fichier sudoers
+
+#R64 Du bon usage de sudoedit Non évaluée
+
+#R65 Activation des profils de sécurité AppArmor Non évaluée
+
+#R66 Activation de la politique targeted avec SELinux Non évaluée
+    > Si aucun autre module de Securité est utilisé autre que SELinux, il faut activer SELinux en mode <enforcing> et utiliser la politique <targeted>.
+Pour cela :
+
+1. Vérifier la valeur des variables SELINUX et SELINUXTYPE dans le fichier
+/etc/selinux/config :
+# grep SELINUX /etc/selinux/config
+SELINUXenforcing
+SELINUXTYPEtargeted
+
+2. Si la valeur de SELINUX nest pas enforcing ou si la valeur de SELINUXTYPE nest pas targeted (ou default), éditer le fichier pour les corriger.
+
+3. Si SELinux nétait pas en mode enforcing, il est nécessaire de vérifier que des labels SELinux sont correctement attribués aux fichiers sur lensemble du système. Cette vérification peut être programmée pour être exécutée de façon automatique au prochain démarrage avec la commande : 
+# fixfiles onboot
+4. Si la politique utilisée nétait pas la politique targeted, recharger la politique utilisée par le noyau avec la commande : 
+# semodule R
+5. Il peut savérer nécessaire de redémarrer le système pour que le changement de politique ou lactivation de SELinux soient correctement pris en compte.
+
+6. Enfin, pour sassurer que SELinux est actif et avec les bons paramètres :
+# sestatus
+SELinux status: enabled
+Loaded policy name: targeted
+Current mode: enforcing
+
+
+
+
+#R67 Paramétrage des booléens SELinux Non évaluée
+Si présence de SELinux c'est commande doivent etre executé
+     setsebool  P allow_execheapoff
+     setsebool  P allow_execmemoff
+     setsebool  P allow_execstackoff
+     setsebool  P secure_mode_insmodoff
+     setsebool  P ssh_sysadm_loginoff
+
+#R68 Désinstallation des outils de débogage de politique SELinux Non évaluée
+     > Pour cela le demon <setroubleshootd> doit être désactivé et paquets <setroubleshoot, setroubleshootserver, setroubleshootplugins> doivent être desinstaller.
+
+ #R69 Confinement des utilisateur interactifs non privilégiés
+Par defaut, les droits user ne sont pas restreint dans la politique targeted,
+ mais il est possiblede confiner sélectivement les users n'ayant pas besoins d'effectuer des taches admin
+     Pour cela : usermod Z user_u <utilisateur> 
+#############################################################################################
+# Obj : vérification de la présence du service fail2ban                                     #
+#############################################################################################
+Votre système ne dispose pas de Fail2ban
+Fail2ban est une application qui analyse les logs de divers services (SSH, Apache, FTP) en cherchant des correspondances entre des motifs définis dans ses filtres et les entrées des logs. Lorsqu'une correspondance est trouvée une ou plusieurs actions sont exécutées. Typiquement, fail2ban cherche des tentatives répétées de connexions infructueuses dans les fichiers journaux et procède à un bannissement en ajoutant une règle au parefeu iptables ou nftables pour bannir l'adresse IP de la source.
