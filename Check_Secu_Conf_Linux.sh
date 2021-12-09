@@ -1,7 +1,7 @@
 #!/bin/bash
 ##################################################################################################
 #                                                                                                #
-# Objet : Script de vérification des recommandations de l'ANSI et des principes de secu de base  #
+# Objet : Script de vérification des recommandations de l'ANSSI et des principes de secu de base #
 #	  pour un systéme GNU/Linux (Debian/Centos)                                              #
 #                                                                                                #
 # Version : 1.3                                                                                  #
@@ -11,7 +11,7 @@
 # Fonctions :                                                                                    #
 #	- Affiche des informations de base (RSO et Systeme) sur le SI.                           #
 #	- Vérifie la configuration du ssh.                                                       #
-#	- Vérifie si les recommendations de l'ANSI sont appliquée.                               #
+#	- Vérifie si les recommendations de l'ANSSI sont appliquée.                              #
 #	- Vérifie si Fail2ban esr installée.                                                     #
 #	- Génére un rapport.                                                                     #
 ##################################################################################################
@@ -354,7 +354,7 @@ fonct_anssi () {
 clear
 
 echo -e "\n##########################################################################################"
-echo 	  "# Obj : Vérification des recommandations de configuration de l'ANSI                      #"
+echo 	  "# Obj : Vérification des recommandations de configuration de l'ANSSI                     #"
 echo 	  "##########################################################################################"
 
 echo -e "\nRecommandations issues de la note technique NoDAT-NT-28/ANSSI/SDE/NP du 22 fevrier 2019
