@@ -221,7 +221,7 @@ echo -e "\nEvaluation non-exhaustive de la configuration du serveur ssh (\"/etc/
 
 echo -e "\n !!! Toute les modifications se font dans le fichier \"/etc/ssh/sshd_config\" !!!"
 
-if grep -q "StrictHostKeyChecking  ask" /etc/ssh/ssh_config 
+if grep -q "StrictHostKeyChecking  ask" /etc/ssh/sshd_config 
      then
 echo -e "\nValidation explicite par l’utilisateur de la clé hôte : 		${green}ok${normal}";
     else
@@ -231,7 +231,7 @@ echo -e "\nValidation explicite par l’utilisateur de la clé hôte : 		${red}n
 fi
 
 
-if grep -q "StrictModes yes " /etc/ssh/ssh_config 
+if grep -q "StrictModes yes " /etc/ssh/sshd_config 
      then
 echo -e "Vérifications des modes et droits : 		\t\t\t${green}ok${normal}";
     else
@@ -240,7 +240,7 @@ echo -e "Vérifications des modes et droits : 		\t\t\t${red}non ${normal}
 fi
 
 
-if grep -q "PermitEmptyPasswords no" /etc/ssh/ssh_config 
+if grep -q "PermitEmptyPasswords no" /etc/ssh/sshd_config 
      then
 echo -e "Interdire les mots de passe vide : 		\t\t\t${green}ok${normal}";
     else
@@ -249,7 +249,7 @@ echo -e "Interdire les mots de passe vide :		 \t\t\t${red}non ${normal}
 fi
 
 
-if grep -q "MaxAuthTries 2" /etc/ssh/ssh_config 
+if grep -q "MaxAuthTries 2" /etc/ssh/sshd_config 
      then
 echo -e "Nombre de tentative d'authentification : 		\t\t${green}ok${normal}";
     else
@@ -258,7 +258,7 @@ echo -e "Nombre de tentative d'authentification : 		\t\t${red}non ${normal}
 fi
 
 
-if grep -q "LoginGraceTime 30" /etc/ssh/ssh_config 
+if grep -q "LoginGraceTime 30" /etc/ssh/sshd_config 
      then
 echo -e "Limite de la durée d'authentification : 		\t\t${green}ok${normal}";
     else
@@ -267,7 +267,7 @@ echo -e "Limite de la durée d'authentification : 		\t\t${red}non ${normal}
 fi
 
 
-if grep -q "PermitRootLogin no" /etc/ssh/ssh_config 
+if grep -q "PermitRootLogin no" /etc/ssh/sshd_config 
      then
 echo -e "Connexion de root interdite : 		\t\t\t\t${green}ok${normal}";
     else
@@ -276,7 +276,7 @@ echo -e "Connexion de root interdite : 		\t\t\t\t${red}non ${normal}
 fi
 
 
-if grep -q "PrintLastLog yes" /etc/ssh/ssh_config 
+if grep -q "PrintLastLog yes" /etc/ssh/sshd_config 
      then
 echo -e "Affichage de la dernière connexion : 		\t\t\t${green}ok${normal}";
     else
@@ -285,7 +285,7 @@ echo -e "Affichage de la dernière connexion : 		\t\t\t${red}non ${normal}
 fi
 
 
-if grep -q "AllowUsers" /etc/ssh/ssh_config 
+if grep -q "AllowUsers" /etc/ssh/sshd_config 
      then
 echo -e "Limiter les utilisateurs autorisés : 		\t\t\t${green}ok${normal}";
 echo -e "    => Verifier que le paramétre AllowUsers dans /etc/sshd/sshd_config 
@@ -299,7 +299,7 @@ echo -e "    => Si vous souhaitez ajouter une liste de compte local d'utilisateu
 		(ex : AllowUsers group1 group2 )"; 
 fi
 
-if grep -q "AllowGroups" /etc/ssh/ssh_config 
+if grep -q "AllowGroups" /etc/ssh/sshd_config 
      then
 echo -e "Limiter les groupes autorisés : 		\t\t\t${green}ok${normal}";
 echo -e "    => Verifier que le paramétre AllowGroups dans /etc/sshd/sshd_config
@@ -312,7 +312,7 @@ echo -e "    => Si vous souhaitez ajouter une liste de groupe
 		dans /etc/sshd/sshd_config (ex : AllowUsers group1 group2 )"; 
 fi
 
-if grep -q "PermitUserEnvironment no" /etc/ssh/ssh_config 
+if grep -q "PermitUserEnvironment no" /etc/ssh/sshd_config 
      then
 echo -e "Bloquer la modification de l’environnement : 		\t\t${green}ok${normal}";
     else
@@ -320,7 +320,7 @@ echo -e "Bloquer la modification de l’environnement : 		\t\t${red}non ${normal
 		 dans \"/etc/ssh/sshd_config\" modifier ou ajouter <PermitUserEnvironment no>";
 fi
 
-if grep -q "\#ListenAddress" /etc/ssh/ssh_config 
+if grep -q "\#ListenAddress" /etc/ssh/sshd_config 
      then
 echo -e "Spécifier l'addresse local d'ecoute pour le SSH :	\t\t${red}non ${normal}
 		 dans \"/etc/ssh/sshd_config\" modifier ou ajouter <ListenAddress> ce champs doit contenir les bons parametres 
@@ -332,7 +332,7 @@ echo -e "Spécifier l'addresse local d'ecoute pour le SSH : 	\t\t${green}ok${nor
 fi
 
 
-if grep -q "AllowTcpForwarding no" /etc/ssh/ssh_config 
+if grep -q "AllowTcpForwarding no" /etc/ssh/sshd_config 
      then
 echo -e "Désactiver les redirections côté serveur : 		\t\t${green}ok${normal}";
     else
@@ -341,7 +341,7 @@ echo -e "Désactiver les redirections côté serveur : 		\t\t${red}non ${normal}
 fi
 
 
-if grep -q "X11Forwarding no" /etc/ssh/ssh_config 
+if grep -q "X11Forwarding no" /etc/ssh/sshd_config 
      then
 echo -e "Désactivation de la redirection X11 : 		\t\t\t${green}ok${normal}";
     else
