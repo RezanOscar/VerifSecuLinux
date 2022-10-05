@@ -231,7 +231,7 @@ echo -e "\nValidation explicite par l’utilisateur de la clé hôte : 		${red}n
 fi
 
 
-if grep -q "StrictModes yes " /etc/ssh/sshd_config 
+if grep -q "StrictModes yes" /etc/ssh/sshd_config 
      then
 echo -e "Vérifications des modes et droits : 		\t\t\t${green}ok${normal}";
     else
